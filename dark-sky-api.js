@@ -1,5 +1,6 @@
 'use strict'
 const req = require('request')
+const url = require('url')
 const moment = require('moment')
 const queryString = require('query-string')
 
@@ -78,9 +79,24 @@ class DarkSky {
       }
     }, this)
   }
+  
+  var requestParser = (function() {
+      var href = document.location.href;
+      var urlObj = url.parse(href, true);
+
+      return { 
+        href,
+        urlObj,
+        getQueryStringValue: (key) => {
+          let value = ((urlObj && urlObj.query) && urlObj.query[key]) || null;
+          return value;
+        },
+        uriMinusPath: urlObj.protocol + '//' + urlObj.hostname                                               
+      };  
+    })();
 
   _generateReqUrl() {
-    this.url = `weather/forecast/${this.apiKey}/${this.lat},${this.long}`
+    this.url = requestParser.uriMinusPath + `/weather/forecast/${this.apiKey}/${this.lat},${this.long}`
     this.t ? (this.url += `,${this.t}`) : this.url
     this.query
       ? (this.url += `?${queryString.stringify(this.query)}`)
