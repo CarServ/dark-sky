@@ -80,8 +80,7 @@ class DarkSky {
   }
 
   _generateReqUrl() {
-    this.url = `https://api.darksky.net/forecast/${this.apiKey}/${this
-      .lat},${this.long}`
+    this.url = `/weather/forecast/${this.apiKey}/${this.lat},${this.long}`
     this.t ? (this.url += `,${this.t}`) : this.url
     this.query
       ? (this.url += `?${queryString.stringify(this.query)}`)
