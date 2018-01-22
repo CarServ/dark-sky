@@ -96,7 +96,7 @@ class DarkSky {
   }
 
   _generateReqUrl() {
-    this.url = this.requestParser.uriMinusPath + `/weather/forecast/${this.apiKey}/${this.lat},${this.long}`
+    this.url = this.requestParser().uriMinusPath + `/weather/forecast/${this.apiKey}/${this.lat},${this.long}`
     this.t ? (this.url += `,${this.t}`) : this.url
     this.query
       ? (this.url += `?${queryString.stringify(this.query)}`)
