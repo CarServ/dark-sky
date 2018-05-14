@@ -16,6 +16,7 @@
     "url": "https://github.com/eliashussary/dark-sky"
   },
   "dependencies": {
+    "fs": "0.0.1-security",
     "moment": "~2.22.1",
     "query-string": "~6.1.0",
     "request": "~2.85.0",
